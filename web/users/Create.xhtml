@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsersCreateDlg" widgetVar="UsersCreateDialog" 
+                  modal="true" appendTo="@(body)" 
+                  header="#{bundle.CreateUsersTitle}"
+                  resizable="true" 
+                  minimizable="true" 
+                  maximizable="true"
+                  responsive="true"
+                  showEffect="fade">
+            <h:form id="UsersCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="6" rendered="#{usersController.selected != null}"> 
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_firtstname}" for="firtstname" />
+                        <p:inputText id="firtstname" value="#{usersController.selected.firtstname}" title="#{bundle.CreateUsersTitle_firtstname}" required="true">
+                           <f:validateLength minimum="3"/>
+                        </p:inputText> 
+                        
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_middlename}" for="middlename" />
+                        <p:inputText id="middlename" value="#{usersController.selected.middlename}" title="#{bundle.CreateUsersTitle_middlename}" required="true">
+                           <f:validateLength minimum="3"/>
+                        </p:inputText> 
+                        
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_lastname}" for="lastname" />
+                        <p:inputText id="lastname" value="#{usersController.selected.lastname}" title="#{bundle.CreateUsersTitle_lastname}" required="true">
+                           <f:validateLength minimum="3"/>
+                        </p:inputText>  
+                        
+                        <p:outputLabel value="Password" for="password" />
+                        <p:inputText id="password" value="#{usersController.selected.password}" title="Password" required="true">
+                           <f:validateLength minimum="3"/>
+                        </p:inputText> 
+                        
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{usersController.selected.email}" title="#{bundle.CreateUsersTitle_email}" required="true">
+                            <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                        </p:inputText>  
+                        
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_phoneNumber}" for="phoneNumber" />
+                        <p:inputText id="phoneNumber" value="#{usersController.selected.phoneNumber}" title="#{bundle.CreateUsersTitle_phoneNumber}" required="true">
+                           
+                        </p:inputText> 
+                        
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_housePhoneNumber}" for="housePhoneNumber" />
+                        <p:inputText id="housePhoneNumber" value="#{usersController.selected.housePhoneNumber}" title="#{bundle.CreateUsersTitle_housePhoneNumber}" />
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_kebele}" for="kebele" />
+                        <p:inputText id="kebele" value="#{usersController.selected.kebele}" title="#{bundle.CreateUsersTitle_kebele}" />
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_idNumber}" for="idNumber" />
+                        <p:inputText id="idNumber" value="#{usersController.selected.idNumber}" title="#{bundle.CreateUsersTitle_idNumber}" />
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_dateOfBirth}" for="dateOfBirth" />
+                        <p:calendar id="dateOfBirth" pattern="MM/dd/yyyy" value="#{usersController.selected.dateOfBirth}" title="#{bundle.CreateUsersTitle_dateOfBirth}" />
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_sex}" for="sex" />
+                        <p:selectOneRadio id="sex" value="#{usersController.selected.sex}" unselectable="true"> 
+                            <f:selectItem itemLabel="Male" itemValue="Male"/>
+                            <f:selectItem itemLabel="Female" itemValue="Female"/> 
+                        </p:selectOneRadio> 
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_casedetail}" for="casedetail" />
+                        <p:inputText id="casedetail" value="#{usersController.selected.casedetail}" title="#{bundle.CreateUsersTitle_casedetail}" />
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_casestartdate}" for="casestartdate" />
+                        <p:calendar id="casestartdate" pattern="MM/dd/yyyy" value="#{usersController.selected.casestartdate}" title="#{bundle.EditUsersTitle_casestartdate}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_nationality}" for="nationality" />
+                        <p:selectOneMenu id="nationality" value="#{usersController.selected.nationality}" >
+                            <f:selectItems value="#{nationalitiesController.itemsAvailableSelectOne}"
+                                           var="nationalityItem"
+                                           itemValue="#{nationalityItem}"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_region}" for="region" />
+                        <p:selectOneMenu id="region" value="#{usersController.selected.region}" >
+                            <f:selectItems value="#{regionsController.itemsAvailableSelectOne}"
+                                           var="regionItem"
+                                           itemValue="#{regionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_title}" for="title" />
+                        <p:selectOneMenu id="title" value="#{usersController.selected.title}" >
+                            <f:selectItems value="#{titlerankController.itemsAvailableSelectOne}"
+                                           var="titleItem"
+                                           itemValue="#{titleItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_woreda}" for="woreda" />
+                        <p:selectOneMenu id="woreda" value="#{usersController.selected.woreda}" >
+                            <f:selectItems value="#{weredasController.itemsAvailableSelectOne}"
+                                           var="woredaItem"
+                                           itemValue="#{woredaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateUsersLabel_zone}" for="zone" />
+                        <p:selectOneMenu id="zone" value="#{usersController.selected.zone}" >
+                            <f:selectItems value="#{zonesController.itemsAvailableSelectOne}"
+                                           var="zoneItem"
+                                           itemValue="#{zoneItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{usersController.create}" value="#{bundle.Save}" update="display,:UsersListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsersCreateDialog');"/>
+                    <p:commandButton style="margin-left: 1%" value="#{bundle.Cancel}" onclick="UsersCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

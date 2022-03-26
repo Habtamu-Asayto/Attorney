@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="RegionsCreateDlg" widgetVar="RegionsCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateRegionsTitle}">
+            <h:form id="RegionsCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{regionsController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateRegionsLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{regionsController.selected.id}" title="#{bundle.CreateRegionsTitle_id}" required="true" requiredMessage="#{bundle.CreateRegionsRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateRegionsLabel_nationality}" for="nationality" />
+                        <p:selectOneMenu id="nationality" value="#{regionsController.selected.nationality}" >
+                            <f:selectItems value="#{nationalitiesController.itemsAvailableSelectOne}"
+                                           var="nationalityItem"
+                                           itemValue="#{nationalityItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateRegionsLabel_regionname}" for="regionname" />
+                        <p:inputText id="regionname" value="#{regionsController.selected.regionname}" title="#{bundle.CreateRegionsTitle_regionname}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{regionsController.create}" value="#{bundle.Save}" update="display,:RegionsListForm:datalist,:growl" oncomplete="handleSubmit(args,'RegionsCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="RegionsCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

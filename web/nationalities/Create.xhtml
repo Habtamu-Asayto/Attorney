@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NationalitiesCreateDlg" widgetVar="NationalitiesCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateNationalitiesTitle}">
+            <h:form id="NationalitiesCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{nationalitiesController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateNationalitiesLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{nationalitiesController.selected.id}" title="#{bundle.CreateNationalitiesTitle_id}" required="true" requiredMessage="#{bundle.CreateNationalitiesRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateNationalitiesLabel_nationalityName}" for="nationalityName" />
+                        <p:inputText id="nationalityName" value="#{nationalitiesController.selected.nationalityName}" title="#{bundle.CreateNationalitiesTitle_nationalityName}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{nationalitiesController.create}" value="#{bundle.Save}" update="display,:NationalitiesListForm:datalist,:growl" oncomplete="handleSubmit(args,'NationalitiesCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="NationalitiesCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

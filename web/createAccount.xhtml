@@ -1,0 +1,146 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+       xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+         <title><ui:insert name="title">AMS</ui:insert></title>
+         <meta charset="utf-8"/>
+         <meta name="viewport" content="width=device-width, initial-scale=1" />
+         <h:outputStylesheet library="css" name="jsfcrud.css"/>
+         <h:outputScript library="js" name="jsfcrud.js"/> 
+         <h:outputStylesheet library="css" name="bootstrap.css"/>
+         <h:outputScript library="js" name="jquery.js"/>
+    </h:head>
+    
+     <ui:composition template="/templatenormal.xhtml">
+     <ui:define name="body">    
+     <p:messages id="msgs" showDetail="true" showSummary="false" >
+             <p:effect type="pulsate" event="load" delay="500" /></p:messages>
+      <h:form>   
+          
+        <!-- Begin Page Content -->
+            <div class="container-fluid"> 
+
+                <div class="row">   
+
+                    <div class="card" >
+
+                           <h:form id="AttorneyAccountCreateForm">
+
+                                <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true"/>
+
+                                  <p:panel header="Attorney Registration"> 
+                                          <f:view> 
+                                              <h:form class="asas">
+                                                  <h6><h:outputText value="Fill required fields carefully(*)."/></h6>
+
+                                                  <p:panelGrid columns="6">
+                                                      <p:outputLabel value="Your name:" for="name" />
+                                                      <p:inputText id="name" value="#{attorneyAccountController.selected.name}" title="Name" />
+                                                      <p:outputLabel value="MiddleName:" for="middleName" />
+                                                      <p:inputText id="middleName" value="#{attorneyAccountController.selected.middleName}" title="MiddleName" />
+                                                      <p:outputLabel value="LastName:" for="lastName" />
+                                                      <p:inputText id="lastName" value="#{attorneyAccountController.selected.lastName}" title="LastName" />
+
+                                                      <p:outputLabel value="Sex:" for="sex" />
+
+                                                      <p:selectOneRadio id="sex" value="#{attorneyAccountController.selected.sex}" unselectable="true">
+                                                          <p:ajax listener="#{attorneyAccountController.selected.setAcadamicRank('undergraduate')}" />
+                                                          <f:selectItem itemLabel="Male" itemValue="Male"/>
+                                                          <f:selectItem itemLabel="Female" itemValue="Female"/> 
+                                                      </p:selectOneRadio> 
+
+                                                      <p:outputLabel value="Phone:" for="phone" />
+                                                      <p:inputText id="phone" value="#{attorneyAccountController.selected.phone}" title="Phone" />
+                                                      <p:outputLabel value="OfficePhone:" for="officePhone" />
+                                                      <p:inputText id="officePhone" value="#{attorneyAccountController.selected.officePhone}" title="OfficePhone" />
+                                                      <p:outputLabel value="DataOfGraduation:" for="dataOfGraduation" />
+                                                      <p:datePicker id="dataOfGraduation" value="#{attorneyAccountController.selected.dataOfGraduation}" title="DataOfGraduation" />
+
+                                                      <p:outputLabel value="AcadamicRank:" for="acadamicRank" />
+                                                      <p:inputText id="acadamicRank" value="#{attorneyAccountController.selected.acadamicRank}" title="AcadamicRank" />
+                                                      <p:outputLabel value="Photo:" for="photo" />
+                                                      <p:inputText id="photo" value="#{attorneyAccountController.selected.photo}" title="Photo" />
+                                                      <p:outputLabel value="Biography:" for="biography" />
+                                                      <p:inputText id="biography" value="#{attorneyAccountController.selected.biography}" title="Biography" />
+                                                      <p:outputLabel value="Kebele:" for="kebele" />
+                                                      <p:inputText id="kebele" value="#{attorneyAccountController.selected.kebele}" title="Kebele" />
+                                                      <p:outputLabel value="WorkingPlace:" for="workingPlace" />
+                                                      <p:inputText id="workingPlace" value="#{attorneyAccountController.selected.workingPlace}" title="WorkingPlace" />
+
+                                                      <p:outputLabel value="Region:" for="regionid" />
+                                                      <p:selectOneMenu id="regionid" value="#{attorneyAccountController.selected.region}" > 
+                                                          <p:ajax update="zoneid" event="change"/>
+                                                          <f:selectItem itemLabel="Select your region" itemValue="#{null}"/>
+                                                          <f:selectItems value="#{regionsController.itemsAvailableSelectOne}"
+                                                                         var="regionidItem"  itemLabel="#{regionidItem}"
+                                                                         itemValue="#{regionidItem}"/>
+                                                      </p:selectOneMenu>  
+ 
+
+                                                      <p:outputLabel value="Zone:" for="zoneid" />
+                                                      <p:selectOneMenu id="zoneid" value="#{attorneyAccountController.selected.zone}" >
+                                                          <p:ajax update="woredaid" event="change"/>
+                                                          <f:selectItem itemLabel=" Select your zone " itemValue="#{null}"/>
+                                                          <f:selectItems value="#{zonesController.itemsAvailableSelectOne}"
+                                                                         var="zoneidItem"
+                                                                         itemDisabled="#{zoneidItem.regionid != attorneyAccountController.selected.region}"
+                                                                         itemValue="#{zoneidItem}"/>
+                                                      </p:selectOneMenu>
+
+
+                                                      <p:outputLabel value="Woreda:" for="woredaid" />
+                                                      <p:selectOneMenu id="woredaid" value="#{attorneyAccountController.selected.woreda}" >
+                                                          <f:selectItem itemLabel="select your woreda" itemValue="#{null}"/>
+                                                          <f:selectItems value="#{weredasController.itemsAvailableSelectOne}"
+                                                                         var="woredaidItem"
+                                                                         itemDisabled="#{woredaidItem.zoneid != mebtnatkmmyefetabherafetatemController.selected.zone}"
+                                                                         itemValue="#{woredaidItem}"/>
+                                                      </p:selectOneMenu>
+
+
+
+                                                       </p:panelGrid>
+
+                                                  <p:panel  toggleable="true"  header="Login Account" >  
+
+                                                      <!-- I will add username and password to a database -->
+                                                      <p:panelGrid columns="6" >
+                                                            <p:outputLabel value="Email:" for="email" />
+                                                            <p:inputText id="email" value="#{attorneyAccountController.selected.email}" title="Email" />
+                                                            <p:outputLabel value="Username:" for="username" />
+                                                            <p:inputText id="username" value="#{attorneyAccountController.selected.username}" title="Username" />
+                                                            <p:outputLabel value="Password:" for="password" />
+                                                            <p:password id="password" value="#{attorneyAccountController.selected.password}" title="Password" />
+                                                            <p:outputLabel value="Confirm Password:" for="confirmpassword" />
+                                                            <p:password id="confirmpassword" value="#{attorneyAccountController.confirmPassword}" title="Confirm Password" />
+                                                            <h:commandButton style="width: 100%" class="btn btn-primary" value="Save" action="#{attorneyAccountController.insert()}" />
+                                                      </p:panelGrid> 
+                                                  </p:panel>
+
+                                              </h:form>
+                                          </f:view>
+
+                                  </p:panel>
+
+                          </h:form> 
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            <!-- /.container-fluid -->
+          
+      </h:form>
+                  
+
+
+        </ui:define>
+     </ui:composition>
+  
+</html>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AttorneyAccountCreateDlg" widgetVar="AttorneyAccountCreateDialog" 
+                  modal="true" appendTo="@(body)" 
+                  header="#{bundle.CreateAttorneyAccountTitle}" 
+                  resizable="true" 
+                  minimizable="true" 
+                  maximizable="true"
+                  responsive="true"
+                  showEffect="fade">
+            <h:form id="AttorneyAccountCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{attorneyAccountController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{attorneyAccountController.selected.id}" title="#{bundle.CreateAttorneyAccountTitle_id}" required="true" requiredMessage="#{bundle.CreateAttorneyAccountRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{attorneyAccountController.selected.name}" title="#{bundle.CreateAttorneyAccountTitle_name}" />
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_middleName}" for="middleName" />
+                        <p:inputText id="middleName" value="#{attorneyAccountController.selected.middleName}" title="#{bundle.CreateAttorneyAccountTitle_middleName}" />
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_lastName}" for="lastName" />
+                        <p:inputText id="lastName" value="#{attorneyAccountController.selected.lastName}" title="#{bundle.CreateAttorneyAccountTitle_lastName}" />
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_sex}" for="sex" />
+                        <p:inputText id="sex" value="#{attorneyAccountController.selected.sex}" title="#{bundle.CreateAttorneyAccountTitle_sex}" />
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_phone}" for="phone" />
+                        <p:inputText id="phone" value="#{attorneyAccountController.selected.phone}" title="#{bundle.CreateAttorneyAccountTitle_phone}" />
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_officePhone}" for="officePhone" />
+                        <p:inputText id="officePhone" value="#{attorneyAccountController.selected.officePhone}" title="#{bundle.CreateAttorneyAccountTitle_officePhone}" />
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{attorneyAccountController.selected.email}" title="#{bundle.CreateAttorneyAccountTitle_email}" />
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_dataOfGraduation}" for="dataOfGraduation" />
+                        <p:calendar id="dataOfGraduation" pattern="MM/dd/yyyy" value="#{attorneyAccountController.selected.dataOfGraduation}" title="#{bundle.EditAttorneyAccountTitle_dataOfGraduation}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_acadamicRank}" for="acadamicRank" />
+                        <p:inputText id="acadamicRank" value="#{attorneyAccountController.selected.acadamicRank}" title="#{bundle.CreateAttorneyAccountTitle_acadamicRank}" />
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_photo}" for="photo" />
+                        <p:inputText id="photo" value="#{attorneyAccountController.selected.photo}" title="#{bundle.CreateAttorneyAccountTitle_photo}" />
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_biography}" for="biography" />
+                        <p:inputText id="biography" value="#{attorneyAccountController.selected.biography}" title="#{bundle.CreateAttorneyAccountTitle_biography}" />
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_kebele}" for="kebele" />
+                        <p:inputText id="kebele" value="#{attorneyAccountController.selected.kebele}" title="#{bundle.CreateAttorneyAccountTitle_kebele}" />
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_workingPlace}" for="workingPlace" />
+                        <p:inputText id="workingPlace" value="#{attorneyAccountController.selected.workingPlace}" title="#{bundle.CreateAttorneyAccountTitle_workingPlace}" />
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_username}" for="username" />
+                        <p:inputText id="username" value="#{attorneyAccountController.selected.username}" title="#{bundle.CreateAttorneyAccountTitle_username}" />
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_password}" for="password" />
+                        <p:inputText id="password" value="#{attorneyAccountController.selected.password}" title="#{bundle.CreateAttorneyAccountTitle_password}" />
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_region}" for="region" />
+                        <p:selectOneMenu id="region" value="#{attorneyAccountController.selected.region}" >
+                            <f:selectItems value="#{regionsController.itemsAvailableSelectOne}"
+                                           var="regionItem"
+                                           itemValue="#{regionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_woreda}" for="woreda" />
+                        <p:selectOneMenu id="woreda" value="#{attorneyAccountController.selected.woreda}" >
+                            <f:selectItems value="#{weredasController.itemsAvailableSelectOne}"
+                                           var="woredaItem"
+                                           itemValue="#{woredaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateAttorneyAccountLabel_zone}" for="zone" />
+                        <p:selectOneMenu id="zone" value="#{attorneyAccountController.selected.zone}" >
+                            <f:selectItems value="#{zonesController.itemsAvailableSelectOne}"
+                                           var="zoneItem"
+                                           itemValue="#{zoneItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{attorneyAccountController.create}" value="#{bundle.Save}" update="display,:AttorneyAccountListForm:datalist,:growl" oncomplete="handleSubmit(args,'AttorneyAccountCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AttorneyAccountCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
