@@ -7,6 +7,7 @@ import java.io.IOException;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -42,8 +43,36 @@ public class CasesController implements Serializable {
     
     private List<Cases> items = null;
     private Cases selected;
+    
+    public String WithName;
+    public String CusName;
+    public String Letter;
 
     public CasesController() {
+    }
+
+    public String getWithName() {
+        return WithName;
+    }
+
+    public void setWithName(String WithName) {
+        this.WithName = WithName;
+    }
+
+    public String getCusName() {
+        return CusName;
+    }
+
+    public void setCusName(String CusName) {
+        this.CusName = CusName;
+    }
+
+    public String getLetter() {
+        return Letter;
+    }
+
+    public void setLetter(String Letter) {
+        this.Letter = Letter;
     }
      
     public void archiveCase(Integer id){
@@ -249,8 +278,19 @@ public class CasesController implements Serializable {
     // Print PDF, ... , ...... using Jasper report
     public void printPDF() throws JRException, IOException{
         String fileName = "cases.pdf";
-        String jasperPath = "/resources/cases.jasper";
-        this.PDF(null, jasperPath, items, fileName);
+        String jasperPath = "/resources/real.jasper";
+        
+        Map<String, Object> parameter = new HashMap<String, Object>();
+        parameter.put("WIT_NAME", "Habtamu Asayto \n Birtukan Asayto \n Witness One \n Winess Two \n Winess Three \n Winess Four \nBirtukan Asayto \n Witness One \n Winess Two \n Winess Three \n Winess Four \nBirtukan Asayto \n Witness One \n Winess Two \n Winess Three \n Winess Four \nBirtukan Asayto \n Witness One \n Winess Two \n Winess Three \n Winess Four");        
+        parameter.put("CUS_NAME", "Customer Name \n One Customer \n Two Customer \n Customer Three \n Witness One \n Winess Four \nBirtukan Asayto");      
+        parameter.put("LETTER", "Dears,  \n" +
+                                "\n" +
+                                "I appreciated you taking the time to chat with me today about ABC News Company, and the ever-changing media world. As I approach my graduation date from XYZ Journalism School, I'm full of questions about the roles available in media. Your insights gained from your career in the industry, as well as your perspective on ABC News Company's five-year plan, were incredibly helpful. \n" +
+                                "\n" +
+                                "I was particularly struck by your ideas on long-form journalism, along with the help (and problems) that social media can provide investigative journalists. You've given me much to think about as I embark on my job search. Also, I appreciate your advice about my writing portfolio—it was so kind of you to really dig in and share your ideas on how to structure it. \n" +
+                                "\n" +
+                                "I look forward to staying in touch, and will let you know how my job search progresses. I hope you'll keep me in mind if any roles open up at ABC New Company, too. Thank you again for taking the time to meet today, and for your thoughtful notes on my portfolio. ");
+        this.PDF(parameter, jasperPath, items, fileName);
     }
     public void PDF(Map<String, Object> params, String jasperPath, List<?> dataSource, String fileName) throws JRException, IOException{
         String relativeWebPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath(jasperPath);

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="10346801-7fc4-4c9c-b4c0-d62317960660">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="LETTER" class="java.lang.String"/>
+	<parameter name="WIT_NAME" class="java.lang.String"/>
+	<parameter name="CUS_NAME" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT * FROM cases, witness;]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="541" splitType="Stretch">
+			<staticText>
+				<reportElement x="20" y="130" width="30" height="20" uuid="bb603db2-393b-417a-afc6-623e6ceb9d2f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[To :]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="50" y="150" width="191" height="108" uuid="395e231a-da8f-43d7-91fd-768d1d65ea72"/>
+				<textElement verticalAlignment="Top">
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{CUS_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="254" y="150" width="148" height="108" uuid="801d3f96-4acb-4c35-928c-3bb37fd8fdb3"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA[$P{WIT_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="422" y="74" width="30" height="20" uuid="3f1ff6e9-3081-4bb9-84d9-d21a0e98ae1c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Date :]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="452" y="74" width="100" height="20" uuid="b27f2235-f9e9-4085-afb1-e10552a3ed81"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="33" y="280" width="503" height="239" uuid="bc857385-494e-4daf-afa3-1a66cbb95e30"/>
+				<textFieldExpression><![CDATA[$P{LETTER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="6" y="62" width="546" height="1" uuid="1c549b0e-f4a4-4088-919e-e782955b9c69"/>
+			</line>
+			<staticText>
+				<reportElement x="50" y="25" width="191" height="29" uuid="f4e616a1-9f24-4b4b-8730-d881bf45816f"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Attorney Report]]></text>
+			</staticText>
+			<image>
+				<reportElement x="341" y="0" width="195" height="62" uuid="dd0ba7cc-b7af-4482-afbc-b0911466492b"/>
+				<imageExpression><![CDATA["/home/habtamu/Downloads/attorney.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="22">
+			<textField>
+				<reportElement x="432" y="0" width="80" height="20" uuid="645a8895-4cbb-41ab-87fd-275eacc2eac8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="512" y="0" width="40" height="20" uuid="d1916783-237e-40f8-bdbb-617515f4fdcf"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
