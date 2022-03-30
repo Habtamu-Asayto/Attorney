@@ -198,7 +198,7 @@ public class Cases implements Serializable {
     }
 
     public void setCaseStatus(Integer caseStatus) {
-        this.caseStatus = 1;
+        this.caseStatus = caseStatus;
     }
 
     @Override

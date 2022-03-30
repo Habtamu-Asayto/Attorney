@@ -90,7 +90,7 @@
                             <f:facet name="header">
                                 <h:outputText value="Action"/>
                             </f:facet> 
-                            <p:commandButton style="background-color: rgba(250, 40, 40, 0.829)" value="#{bundle.Archive}"/>
+                            <p:commandButton value="Archive" action="#{casesController.archiveCase(item.id)}" style="background-color: rgba(250, 40, 40, 0.829)" disabled="#{item.caseStatus==0}"/>
                         </p:column>
                         
                         <f:facet name="footer">

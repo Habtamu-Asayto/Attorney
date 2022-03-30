@@ -140,7 +140,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="28" splitType="Stretch">
+		<band height="29" splitType="Stretch">
 			<textField>
 				<reportElement x="94" y="2" width="62" height="20" uuid="86ffde18-4165-471a-8f11-64e9f3f9e8e3"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
@@ -174,7 +174,7 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="8" splitType="Stretch"/>
+		<band height="4" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="47" splitType="Stretch">

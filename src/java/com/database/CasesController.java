@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.EJBException; 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
@@ -45,6 +46,13 @@ public class CasesController implements Serializable {
     public CasesController() {
     }
      
+    public void archiveCase(Integer id){
+        id=0;
+        selected.setCaseStatus(id);
+        this.ejbFacade.edit(selected);
+        System.out.println("Archive finish");
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Case successfull Archived!"));
+    }
     
     public Cases getSelected() {
         return selected;
@@ -68,7 +76,7 @@ public class CasesController implements Serializable {
         selected = new Cases();
         initializeEmbeddableKey();
         return selected;
-    }
+    } 
     
     public void addWitness(){
          for(Witness w : witnesses){
